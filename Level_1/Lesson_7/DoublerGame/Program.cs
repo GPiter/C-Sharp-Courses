@@ -11,56 +11,17 @@ namespace DoublerGame
         }
     }
 
-    class Doubler
-    {
-        int current = 1;
-        int finish;
-
-        public Doubler()
-        {
-            Random rnd = new Random();
-            finish = rnd.Next(1, 11);
-        }
-
-        public Doubler(int number)
-        {
-            finish = number;
-        }
-
-        public void NumbPlusOne()
-        {
-            current += 1;
-        }
-
-        public void NumbMultiplyTwo()
-        {
-            current *= 2;
-        }
-
-        public void NumbReset()
-        {
-            current = 1;
-        }
-
-        public int GetCurrent
-        {
-            get { return current; }
-        }
-
-        public int GetFinish
-        {
-            get { return finish; }
-        }
-    }
-
     class Form1 : Form
     {
         Label lblCurrent;
         Label lblFinish;
+        Label lblCountClick;
         Button btnPlus;
         Button btnMulti;
         Button btnReset;
         Doubler dbl;
+
+        int count_click = 0;
 
         public Form1()
         {
@@ -76,12 +37,19 @@ namespace DoublerGame
 
             lblFinish = new Label();
             lblFinish.Parent = this;
-
             lblFinish.Text = "Целевое число: " + dbl.GetFinish.ToString();
-            lblFinish.Height = 50;
+            lblFinish.Height = 40;
             lblFinish.Top = 50;
             lblFinish.Left = 10;
             lblFinish.Name = "lblFinish";
+
+            lblCountClick = new Label();
+            lblCountClick.Parent = this;
+            lblCountClick.Text = "Количество отданных команд: " + dbl.GetCount.ToString();
+            lblCountClick.Height = 40;
+            lblCountClick.Top = 100;
+            lblCountClick.Left = 10;
+            lblCountClick.Name = "lblCountClick";
 
             btnPlus = new Button();
             btnPlus.Parent = this;
@@ -112,6 +80,7 @@ namespace DoublerGame
         private void lblDraw()
         {
             lblCurrent.Text = dbl.GetCurrent.ToString();
+            lblCountClick.Text = "Количество отданных команд: " + dbl.GetCount.ToString();
         }
 
         private void Btn_Is_Clicked(object sender, EventArgs e)
@@ -134,7 +103,7 @@ namespace DoublerGame
         {
             if(dbl.GetCurrent == dbl.GetFinish)
             {
-                MessageBox.Show("Вы выиграли!");
+                MessageBox.Show("Вы выиграли! Количество ходов: " + dbl.GetCount.ToString());
                 Application.Exit();
             }
 
