@@ -56,12 +56,16 @@ namespace DoublerGame
     class Form1 : Form
     {
         Label lblCurrent;
+        Label lblFinish;
         Button btnPlus;
         Button btnMulti;
         Button btnReset;
+        Doubler dbl;
 
         public Form1()
         {
+            dbl = new Doubler(20);
+
             Text = "Удвоитель";
             lblCurrent = new Label();
             lblCurrent.Parent = this;
@@ -70,6 +74,14 @@ namespace DoublerGame
             lblCurrent.Left = 10;
             lblCurrent.Name = "lblCurrent";
 
+            lblFinish = new Label();
+            lblFinish.Parent = this;
+
+            lblFinish.Text = "Целевое число: " + dbl.GetFinish.ToString();
+            lblFinish.Height = 50;
+            lblFinish.Top = 50;
+            lblFinish.Left = 10;
+            lblFinish.Name = "lblFinish";
 
             btnPlus = new Button();
             btnPlus.Parent = this;
@@ -77,6 +89,7 @@ namespace DoublerGame
             btnPlus.Top = 10;
             btnPlus.Left = 200;
             btnPlus.Name = "btnPlus";
+            btnPlus.Click += Btn_Is_Clicked;
 
             btnMulti = new Button();
             btnMulti.Parent = this;
@@ -84,6 +97,7 @@ namespace DoublerGame
             btnMulti.Top = 100;
             btnMulti.Left = 200;
             btnMulti.Name = "btnMulti";
+            btnMulti.Click += Btn_Is_Clicked;
 
             btnReset = new Button();
             btnReset.Parent = this;
@@ -91,8 +105,46 @@ namespace DoublerGame
             btnReset.Top = 190;
             btnReset.Left = 200;
             btnReset.Name = "btnReset";
+            btnReset.Click += Btn_Is_Clicked;
 
         }
+
+        private void lblDraw()
+        {
+            lblCurrent.Text = dbl.GetCurrent.ToString();
+        }
+
+        private void Btn_Is_Clicked(object sender, EventArgs e)
+        {
+            if (sender is Button)
+            {
+                if ((sender as Button).Name == "btnPlus") dbl.NumbPlusOne();
+
+                if ((sender as Button).Name == "btnMulti") dbl.NumbMultiplyTwo();
+
+                if ((sender as Button).Name == "btnReset") dbl.NumbReset();
+            }
+
+            lblDraw();
+            FinishGame();
+
+        }
+
+        private void FinishGame()
+        {
+            if(dbl.GetCurrent == dbl.GetFinish)
+            {
+                MessageBox.Show("Вы выиграли!");
+                Application.Exit();
+            }
+
+            if (dbl.GetCurrent > dbl.GetFinish)
+            {
+                MessageBox.Show("Ваше число больше целевого. Вы проиграли!");
+                Application.Exit();
+            }
+        }
+
     }
 
 }
