@@ -9,10 +9,11 @@ namespace DoublerGame
 {
     class Doubler
     {
+        int count = 0;
         int current = 1;
         int finish;
-        int count = 0;
-        
+        int buffer;
+
         /* ----- ОПИСАНИЕ КОНСТРУКТОРОВ ----- */
 
         // Задание случайного целевого числа в диапазоне от 2 до 100
@@ -33,6 +34,7 @@ namespace DoublerGame
         // Метод увеличения текущего числа на 1
         public void NumbPlusOne()
         {
+            buffer = current;
             current += 1;
             count++;
         }
@@ -40,6 +42,7 @@ namespace DoublerGame
         // Метод умножения текущего числа на 2
         public void NumbMultiplyTwo()
         {
+            buffer = current;
             current *= 2;
             count++;
         }
@@ -47,7 +50,14 @@ namespace DoublerGame
         // Метод сброса текущего числа до 1
         public void NumbReset()
         {
+            buffer = current;
             current = 1;
+            count++;
+        }
+
+        public void NumbCansel()
+        {
+            current = buffer;
             count++;
         }
 
@@ -69,6 +79,12 @@ namespace DoublerGame
         public int GetCount
         {
             get { return count; }
+        }
+
+        // Получение предыдущего значения
+        public int GetPrevious
+        {
+            get { return buffer; }
         }
 
     }
