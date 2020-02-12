@@ -53,7 +53,7 @@
             // 
             this.txtbName1.Location = new System.Drawing.Point(165, 41);
             this.txtbName1.Name = "txtbName1";
-            this.txtbName1.Size = new System.Drawing.Size(117, 20);
+            this.txtbName1.Size = new System.Drawing.Size(170, 20);
             this.txtbName1.TabIndex = 0;
             // 
             // label1
@@ -78,7 +78,7 @@
             // 
             this.txtbName2.Location = new System.Drawing.Point(165, 75);
             this.txtbName2.Name = "txtbName2";
-            this.txtbName2.Size = new System.Drawing.Size(117, 20);
+            this.txtbName2.Size = new System.Drawing.Size(170, 20);
             this.txtbName2.TabIndex = 2;
             // 
             // label3
@@ -94,7 +94,7 @@
             // 
             this.txtbName4.Location = new System.Drawing.Point(165, 144);
             this.txtbName4.Name = "txtbName4";
-            this.txtbName4.Size = new System.Drawing.Size(117, 20);
+            this.txtbName4.Size = new System.Drawing.Size(170, 20);
             this.txtbName4.TabIndex = 6;
             // 
             // label4
@@ -110,7 +110,7 @@
             // 
             this.txtbName3.Location = new System.Drawing.Point(165, 110);
             this.txtbName3.Name = "txtbName3";
-            this.txtbName3.Size = new System.Drawing.Size(117, 20);
+            this.txtbName3.Size = new System.Drawing.Size(170, 20);
             this.txtbName3.TabIndex = 4;
             // 
             // label5
@@ -126,7 +126,7 @@
             // 
             this.txtbDate3.Location = new System.Drawing.Point(165, 281);
             this.txtbDate3.Name = "txtbDate3";
-            this.txtbDate3.Size = new System.Drawing.Size(117, 20);
+            this.txtbDate3.Size = new System.Drawing.Size(170, 20);
             this.txtbDate3.TabIndex = 14;
             // 
             // label6
@@ -142,7 +142,7 @@
             // 
             this.txtbDate2.Location = new System.Drawing.Point(165, 247);
             this.txtbDate2.Name = "txtbDate2";
-            this.txtbDate2.Size = new System.Drawing.Size(117, 20);
+            this.txtbDate2.Size = new System.Drawing.Size(170, 20);
             this.txtbDate2.TabIndex = 12;
             // 
             // label7
@@ -158,7 +158,7 @@
             // 
             this.txtbDate1.Location = new System.Drawing.Point(165, 212);
             this.txtbDate1.Name = "txtbDate1";
-            this.txtbDate1.Size = new System.Drawing.Size(117, 20);
+            this.txtbDate1.Size = new System.Drawing.Size(170, 20);
             this.txtbDate1.TabIndex = 10;
             // 
             // label8
@@ -174,22 +174,23 @@
             // 
             this.txtbName5.Location = new System.Drawing.Point(165, 178);
             this.txtbName5.Name = "txtbName5";
-            this.txtbName5.Size = new System.Drawing.Size(117, 20);
+            this.txtbName5.Size = new System.Drawing.Size(170, 20);
             this.txtbName5.TabIndex = 8;
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(76, 333);
+            this.btnGenerate.Location = new System.Drawing.Point(108, 325);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(168, 29);
             this.btnGenerate.TabIndex = 17;
             this.btnGenerate.Text = "Сгенерировать завяление";
             this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(578, 9);
+            this.label9.Location = new System.Drawing.Point(691, 9);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 13);
             this.label9.TabIndex = 18;
@@ -197,10 +198,10 @@
             // 
             // txtbResult
             // 
-            this.txtbResult.Location = new System.Drawing.Point(437, 31);
+            this.txtbResult.Location = new System.Drawing.Point(463, 25);
             this.txtbResult.Multiline = true;
             this.txtbResult.Name = "txtbResult";
-            this.txtbResult.Size = new System.Drawing.Size(333, 382);
+            this.txtbResult.Size = new System.Drawing.Size(471, 329);
             this.txtbResult.TabIndex = 16;
             this.txtbResult.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtbResult_KeyPress);
             // 
@@ -208,7 +209,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 450);
+            this.ClientSize = new System.Drawing.Size(952, 391);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.txtbResult);
