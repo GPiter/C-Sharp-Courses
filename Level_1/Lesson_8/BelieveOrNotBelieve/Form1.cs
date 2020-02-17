@@ -12,9 +12,15 @@ namespace BlvOrNotBlv
 {
     public partial class Form1 : Form
     {
+        TrueFalse database;
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            database.AddQuestion(tbQuestionText.Text, cbTruth.Checked);
         }
     }
 }
