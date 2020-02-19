@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlvOrNotBlv.Properties
+namespace BelieveOrNotBelieve.Properties
 {
 
 

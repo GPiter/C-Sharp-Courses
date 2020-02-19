@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("BlvOrNotBlv")]
+[assembly: AssemblyTitle("BelieveOrNotBelieve")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Win-Torrent Yagd")]
-[assembly: AssemblyProduct("BlvOrNotBlv")]
+[assembly: AssemblyProduct("BelieveOrNotBelieve")]
 [assembly: AssemblyCopyright("Copyright © Win-Torrent Yagd 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("42795acd-9439-49d7-b4bf-8b7b535c77c1")]
+[assembly: Guid("e0a8a42e-87a2-45f8-a20d-09c81b6fdc78")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
