@@ -11,6 +11,7 @@ namespace Asteroids
         // Массив базовых объектов (астероиды, звезды)
         static BaseObject[] objects;
         static Asteroid[] asteroids;
+        static Bullet bullet;
 
         // Объект планеты
         static Planet earth;
@@ -71,6 +72,7 @@ namespace Asteroids
             earth = new Planet(new Point(700, 200), new Point(-2, 0), new Size(50, 50));
             objects = new BaseObject[30];
             asteroids = new Asteroid[3];
+            bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
 
             for (int i = 0; i < objects.Length; i++)
             {
@@ -106,6 +108,7 @@ namespace Asteroids
             }
 
             earth.Draw();
+            bullet.Draw();
 
             buffer.Render();
         }
@@ -114,6 +117,7 @@ namespace Asteroids
         static public void Update()
         {
             earth.Update();
+            bullet.Update();
 
             foreach (BaseObject obj in objects)
             {

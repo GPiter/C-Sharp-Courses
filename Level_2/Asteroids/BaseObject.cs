@@ -65,7 +65,7 @@ namespace Asteroids
         // Переопределение метода обновления объекта
         public override void Update()
         {
-            /*
+            
             pos.X += dir.X;
             if (pos.X < 0)
             {
@@ -73,8 +73,8 @@ namespace Asteroids
                 pos.Y = Game.rnd.Next(0, Game.Height);
                 dir.X = -Game.rnd.Next(1, 10);
             }
-            */
             
+            /*
             pos.X += dir.X;
             if (pos.X < 0)
             {
@@ -84,7 +84,7 @@ namespace Asteroids
                 if (pos.Y < 0) dir.Y = -dir.Y;
             }
             
-
+            */
         }
     }
 
@@ -137,7 +137,39 @@ namespace Asteroids
 
         public override void Draw()
         {
-            Game.buffer.Graphics.DrawImage(img, pos.X, pos.Y);
+            //Game.buffer.Graphics.DrawImage(img, pos.X, pos.Y);
+            Game.buffer.Graphics.FillEllipse(Brushes.White, pos.X, pos.Y, size.Width, size.Height);
         }
     }
+
+    /* -------------- КЛАСС Bullet --------------
+      * 
+      *  Описывает характеристики и поведение для объекта типа "Bullet"
+      * 
+    */
+
+    class Bullet : BaseObject
+    {
+
+        // ------ ОПИСАНИЕ МЕТОДОВ ------
+
+        public Bullet(Point pos, Point dir, Size size) : base(pos, dir, size)
+        {
+
+        }
+
+        public override void Draw()
+        {
+            Game.buffer.Graphics.DrawRectangle(Pens.OrangeRed, pos.X, pos.Y, size.Width, size.Height);
+        }
+
+        public override void Update()
+        {
+            pos.X += 3;
+        }
+
+    }
+
+
+
 }
