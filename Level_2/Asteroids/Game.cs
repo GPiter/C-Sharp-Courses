@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
+using System.Collections.Generic;
 using System;
 
 namespace Asteroids
@@ -11,7 +12,7 @@ namespace Asteroids
         // Массив базовых объектов (астероиды, звезды)
         static BaseObject[] objects;
         static Asteroid[] asteroids;
-        static Bullet bullet;
+        static List<Bullet> bullets = new List<Bullet>();
 
         // Объект планеты
         static Planet earth;
@@ -72,7 +73,7 @@ namespace Asteroids
         {
             if (e.KeyCode == Keys.ControlKey)
             {
-                bullet = new Bullet(new Point(ship.Rect.X + 25, ship.Rect.Y + 26), new Point(4, 0), new Size(4, 1));
+                bullets.Add( new Bullet(new Point(ship.Rect.X + 25, ship.Rect.Y + 26), new Point(4, 0), new Size(4, 1)) );
                 bulletCounter++;
             }
             if (e.KeyCode == Keys.Up) ship.Up();
@@ -92,7 +93,6 @@ namespace Asteroids
             earth = new Planet(new Point(700, 200), new Point(-2, 0), new Size(50, 50));
             objects = new BaseObject[30];
             asteroids = new Asteroid[3];
-            bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
 
             for (int i = 0; i < objects.Length; i++)
             {
@@ -127,11 +127,14 @@ namespace Asteroids
                 if( asteroid != null) asteroid.Draw();
             }
 
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Draw();
+            }
+
             earth.Draw();
-
-            if( bullet != null ) bullet.Draw();
-
             ship.Draw();
+
             buffer.Graphics.DrawString("Energy: " + ship.Energy, SystemFonts.DefaultFont, Brushes.White, 0, 0);
             buffer.Graphics.DrawString("Bullets count: " + bulletCounter, SystemFonts.DefaultFont, Brushes.White, 100, 0);
 
@@ -148,22 +151,28 @@ namespace Asteroids
                 obj.Update();
             }
 
-            if (bullet != null) bullet.Update();
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Update();
+            }
 
             for (int i = 0; i < asteroids.Length; i++)
             {
                 if (asteroids[i] != null)
                 {
                     asteroids[i].Update();
-                    if(bullet != null && bullet.Collision(asteroids[i]))
-                    {
-                        System.Media.SystemSounds.Hand.Play();
-                        asteroids[i] = null;
-                        bullet = null;
-                        continue;
-                    }
 
-                    if (ship.Collision(asteroids[i]))
+                    for (int j = 0; j < bullets.Count; j++)
+                        if (asteroids[i] != null && bullets[j].Collision(asteroids[i]))
+                        {
+                            System.Media.SystemSounds.Hand.Play();
+                            asteroids[i] = null;
+                            bullets.RemoveAt(j);
+                            j--;
+                            continue;
+                        }
+
+                    if (asteroids[i] != null && ship.Collision(asteroids[i]))
                     {
                         ship.EnergyLow(rnd.Next(1, 10));
                         System.Media.SystemSounds.Asterisk.Play();
