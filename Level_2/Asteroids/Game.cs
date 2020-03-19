@@ -16,6 +16,9 @@ namespace Asteroids
         // Объект планеты
         static Planet earth;
 
+        // Объект корабля
+        static Ship ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(10, 10));
+
         // Поля для создания графического буффера
         static BufferedGraphicsContext context;
         static public BufferedGraphics buffer;
@@ -24,7 +27,10 @@ namespace Asteroids
         static public int Width { get; set; }
         static public int Height { get; set; }
 
+        static Timer timer = new Timer();
         static public Random rnd = new Random();
+
+        static int bulletCounter = 0;
 
         static Game()
         {
@@ -53,10 +59,24 @@ namespace Asteroids
             Load(); 
 
             // Установка таймера для связывания события отрисовки и обновления экрана
-            Timer timer = new Timer();
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
             timer.Start();
+
+            form.KeyDown += Form_KeyDown;
+            Ship.MessageDie += Finish;
+        }
+
+        // Обработка события нажатия на клавиши
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                bullet = new Bullet(new Point(ship.Rect.X + 25, ship.Rect.Y + 26), new Point(4, 0), new Size(4, 1));
+                bulletCounter++;
+            }
+            if (e.KeyCode == Keys.Up) ship.Up();
+            if (e.KeyCode == Keys.Down) ship.Down();
         }
 
         // Каждый тик таймера отрисовываем и обновляем экран
@@ -102,13 +122,18 @@ namespace Asteroids
                 obj.Draw();
             }
 
-            foreach(BaseObject obj in asteroids)
+            foreach(Asteroid asteroid in asteroids)
             {
-                obj.Draw();
+                if( asteroid != null) asteroid.Draw();
             }
 
             earth.Draw();
-            bullet.Draw();
+
+            if( bullet != null ) bullet.Draw();
+
+            ship.Draw();
+            buffer.Graphics.DrawString("Energy: " + ship.Energy, SystemFonts.DefaultFont, Brushes.White, 0, 0);
+            buffer.Graphics.DrawString("Bullets count: " + bulletCounter, SystemFonts.DefaultFont, Brushes.White, 100, 0);
 
             buffer.Render();
         }
@@ -117,18 +142,42 @@ namespace Asteroids
         static public void Update()
         {
             earth.Update();
-            bullet.Update();
 
             foreach (BaseObject obj in objects)
             {
                 obj.Update();
             }
 
-            foreach (BaseObject obj in asteroids)
-            {
-                obj.Update();
-            }
+            if (bullet != null) bullet.Update();
 
+            for (int i = 0; i < asteroids.Length; i++)
+            {
+                if (asteroids[i] != null)
+                {
+                    asteroids[i].Update();
+                    if(bullet != null && bullet.Collision(asteroids[i]))
+                    {
+                        System.Media.SystemSounds.Hand.Play();
+                        asteroids[i] = null;
+                        bullet = null;
+                        continue;
+                    }
+
+                    if (ship.Collision(asteroids[i]))
+                    {
+                        ship.EnergyLow(rnd.Next(1, 10));
+                        System.Media.SystemSounds.Asterisk.Play();
+                        if (ship.Energy <= 0) ship.Die();
+                    }
+                }
+            }
+        }
+
+        static public void Finish()
+        {
+            timer.Stop();
+            buffer.Graphics.DrawString("The End", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Underline), Brushes.White, 200, 100);
+            buffer.Render();
         }
     }
 }

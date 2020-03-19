@@ -2,13 +2,19 @@
 
 namespace Asteroids
 {
+    delegate void Message();
+    interface ICollision
+    {
+        bool Collision(ICollision obj);
+        Rectangle Rect { get; }
+    }
 
     /* -------------- КЛАСС BaseObject --------------
       * 
       *  Базовый класс, который задает общие характеристики и поведение для всех объектов.
       * 
     */
-    abstract class BaseObject
+    abstract class BaseObject : ICollision
     {
         // ------ ОПИСАНИЕ ПОЛЕЙ ------
 
@@ -29,17 +35,24 @@ namespace Asteroids
         public abstract void Draw();
 
         // Обновление объекта на следующем кадре
-        public virtual void Update()
-        {
-            pos.X += dir.X;
-            if (pos.X < 0) pos.X = Game.Width + size.Width;
-        }
+        public abstract void Update();
 
         // Переопределение метода ToString() для вывода информации об объекте
         public override string ToString()
         {
             return "Pos: " + pos.ToString() + " Dir: " + dir.ToString() + " Size: " + size.ToString(); 
         }
+
+        public bool Collision(ICollision obj)
+        {
+            if (obj.Rect.IntersectsWith(this.Rect)) return true; else return false;
+        }
+
+        public Rectangle Rect
+        {
+            get { return new Rectangle(pos, size); }
+        }
+
     }
 
     /* -------------- КЛАСС Star --------------
@@ -49,6 +62,8 @@ namespace Asteroids
     */
     class Star : BaseObject
     {
+        Image img = Image.FromFile("img\\star.bmp");    // Изображение объекта
+
         // ------ ОПИСАНИЕ МЕТОДОВ ------
         public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
@@ -58,8 +73,7 @@ namespace Asteroids
         // Переопределение метода отрисовки объекта
         public override void Draw()
         {
-            Game.buffer.Graphics.DrawLine(Pens.White, pos.X, pos.Y, pos.X + size.Width, pos.Y + size.Height);
-            Game.buffer.Graphics.DrawLine(Pens.White, pos.X + size.Width, pos.Y, pos.X, pos.Y + size.Height);
+            Game.buffer.Graphics.DrawImage(img, pos.X, pos.Y);
         }
 
         // Переопределение метода обновления объекта
@@ -74,17 +88,6 @@ namespace Asteroids
                 dir.X = -Game.rnd.Next(1, 10);
             }
             
-            /*
-            pos.X += dir.X;
-            if (pos.X < 0)
-            {
-                pos.X = Game.Width + size.Width;
-                pos.Y += dir.Y;
-                if (pos.Y > Game.Height) dir.Y = -dir.Y;
-                if (pos.Y < 0) dir.Y = -dir.Y;
-            }
-            
-            */
         }
     }
 
@@ -126,19 +129,40 @@ namespace Asteroids
     */
     class Asteroid : BaseObject
     {
-        public int Power { get; set; }
+        public int Power { get; set; } = 3;
 
         Image img = Image.FromFile("img\\asteroid.bmp");    // Изображение объекта
 
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            Power = 1;
+            Power = Game.rnd.Next(1, 4);    // От 1 до 3 выстрелов для разрушения
         }
 
         public override void Draw()
         {
             //Game.buffer.Graphics.DrawImage(img, pos.X, pos.Y);
             Game.buffer.Graphics.FillEllipse(Brushes.White, pos.X, pos.Y, size.Width, size.Height);
+        }
+
+        // Переопределение метода обновления объекта
+        public override void Update()
+        {
+
+            pos.X += dir.X;
+            if (pos.X < 0)
+            {
+                pos.X = 830;
+                pos.Y = Game.rnd.Next(0, Game.Height);
+                dir.X = -Game.rnd.Next(1, 10);
+            }
+        }
+
+        // Обновление объекта в начальное положение
+        public void Reset()
+        {
+            pos.X = 830;
+            pos.Y = Game.rnd.Next(0, Game.Height);
+            dir.X = -Game.rnd.Next(1, 10);
         }
     }
 
@@ -150,7 +174,6 @@ namespace Asteroids
 
     class Bullet : BaseObject
     {
-
         // ------ ОПИСАНИЕ МЕТОДОВ ------
 
         public Bullet(Point pos, Point dir, Size size) : base(pos, dir, size)
@@ -161,13 +184,74 @@ namespace Asteroids
         public override void Draw()
         {
             Game.buffer.Graphics.DrawRectangle(Pens.OrangeRed, pos.X, pos.Y, size.Width, size.Height);
+
         }
 
         public override void Update()
         {
-            pos.X += 3;
+            pos.X += 10;
         }
 
+        // Обновление объекта в начальное положение
+        public void Reset()
+        {
+            pos.X = 10;
+            pos.Y = Game.rnd.Next(0, Game.Height);
+            dir.X = -Game.rnd.Next(1, 10);
+        }
+    }
+
+    /* -------------- КЛАСС Ship --------------
+      * 
+      *  Описывает характеристики и поведение для объекта типа "Корабль"
+      * 
+    */
+
+    class Ship : BaseObject
+    {
+        int energy = 100;
+        Image img = Image.FromFile("img\\ship.png");    // Изображение объекта
+        public static event Message MessageDie;
+
+        public int Energy
+        {
+            get { return energy; }
+        }
+
+        public void EnergyLow(int n)
+        {
+            energy -= n;
+        }
+
+        public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
+        {
+
+        }
+
+        public override void Draw()
+        {
+            Game.buffer.Graphics.DrawImage(img, pos.X, pos.Y);
+        }
+
+        public override void Update()
+        {
+            
+        }
+
+        public void Up()
+        {
+            if (pos.Y > 0) pos.Y = pos.Y - dir.Y;
+        }
+
+        public void Down()
+        {
+            if (pos.Y < Game.Height) pos.Y = pos.Y + dir.Y;
+        }
+
+        public void Die()
+        {
+            if (MessageDie != null) MessageDie();
+        }
     }
 
 
