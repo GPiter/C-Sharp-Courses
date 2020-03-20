@@ -11,7 +11,7 @@ namespace Asteroids
 
         // Массив базовых объектов (астероиды, звезды)
         static BaseObject[] objects;
-        static Asteroid[] asteroids;
+        static List<Asteroid> asteroids = new List<Asteroid>();
         static List<Bullet> bullets = new List<Bullet>();
 
         // Объект планеты
@@ -32,6 +32,7 @@ namespace Asteroids
         static public Random rnd = new Random();
 
         static int bulletCounter = 0;
+        static int asteroidCounter = 3;
 
         static Game()
         {
@@ -92,7 +93,6 @@ namespace Asteroids
         {
             earth = new Planet(new Point(700, 200), new Point(-2, 0), new Size(50, 50));
             objects = new BaseObject[30];
-            asteroids = new Asteroid[3];
 
             for (int i = 0; i < objects.Length; i++)
             {
@@ -100,10 +100,10 @@ namespace Asteroids
                 objects[i] = new Star(new Point( 600, Game.rnd.Next(0, Game.Height) ), new Point(-r, r), new Size(5, 5));
             }
 
-            for (int i = 0; i < asteroids.Length; i++)
+            for (int i = 0; i < asteroidCounter; i++)
             {
                 int r = rnd.Next(5, 50);
-                asteroids[i] = new Asteroid(new Point( 600, Game.rnd.Next(0, Game.Height) ), new Point(-r/5, r), new Size(r, r));
+                asteroids.Add(new Asteroid(new Point( 600, Game.rnd.Next(0, Game.Height) ), new Point(-r/5, r), new Size(r, r)));
             }
 
         }
@@ -156,7 +156,7 @@ namespace Asteroids
                 bullet.Update();
             }
 
-            for (int i = 0; i < asteroids.Length; i++)
+            for (int i = 0; i < asteroids.Count; i++)
             {
                 if (asteroids[i] != null)
                 {
@@ -178,6 +178,23 @@ namespace Asteroids
                         System.Media.SystemSounds.Asterisk.Play();
                         if (ship.Energy <= 0) ship.Die();
                     }
+                }
+
+                if (asteroids[i] == null)
+                {
+                    asteroids.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            if (asteroids.Count == 0)
+            {
+                asteroidCounter++;
+
+                for (int i = 0; i < asteroidCounter; i++)
+                {
+                    int r = rnd.Next(5, 50);
+                    asteroids.Add(new Asteroid(new Point(600, Game.rnd.Next(0, Game.Height)), new Point(-r / 5, r), new Size(r, r)));
                 }
             }
         }
