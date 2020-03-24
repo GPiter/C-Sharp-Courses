@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionLearning", "CollectionLearning\CollectionLearning.csproj", "{EB7650E7-FFF7-4DAE-8AAD-C5BCE106DDB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCollection", "GenericCollection\GenericCollection.csproj", "{0E1FA98B-5275-40E0-A22E-ED141680E904}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqPractice", "LinqPractice\LinqPractice.csproj", "{77466F71-4EF9-49C5-9193-427657D29271}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{EB7650E7-FFF7-4DAE-8AAD-C5BCE106DDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB7650E7-FFF7-4DAE-8AAD-C5BCE106DDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB7650E7-FFF7-4DAE-8AAD-C5BCE106DDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1FA98B-5275-40E0-A22E-ED141680E904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1FA98B-5275-40E0-A22E-ED141680E904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1FA98B-5275-40E0-A22E-ED141680E904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1FA98B-5275-40E0-A22E-ED141680E904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77466F71-4EF9-49C5-9193-427657D29271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77466F71-4EF9-49C5-9193-427657D29271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77466F71-4EF9-49C5-9193-427657D29271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77466F71-4EF9-49C5-9193-427657D29271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
