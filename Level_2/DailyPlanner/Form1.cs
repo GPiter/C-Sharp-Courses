@@ -117,5 +117,47 @@ namespace DailyPlanner
                 MessageBox.Show(txtbTimerMsg.Text);
             }
         }
+
+        private void BtnGetWeather_Click(object sender, EventArgs e)
+        {
+            // Используем веб сервис для получения погоды
+            var weather = new com.cobbnz.weather.clsWebService();
+            // Записываем результат запроса в формат xml
+            var str_xml = weather.GetCurrentConditionsAsXML("Saint-Petersburg");
+            // Отображаем xml-формат в поле textbox
+            tbWeatherInfo.Text = str_xml.ToString();
+
+            // Десериализация полученного xml
+            // Создаем объкект типа "XmlDocument"
+            var document = new System.Xml.XmlDocument();
+            document.LoadXml(str_xml);
+
+            // Создаем объект типа "Чтение узлов xml"
+            var reader = new System.Xml.XmlNodeReader(document);
+            var name = String.Empty;
+            var temp = String.Empty;
+
+            // Цикл по узлам xml-документа
+            while (reader.Read() == true)
+            {
+                // Читаем последовательно каждый узел, выясняя тип узла
+                if (reader.NodeType == System.Xml.XmlNodeType.Element)
+                    name = reader.Name;
+
+                // Каждый раз запоминаем имя узла
+                if (reader.NodeType != System.Xml.XmlNodeType.Text)
+                    continue;
+
+                // Выход из цикла, когда прочитали данные узла TemperatureCurrent
+                if (name == "TemperatureCurrent")
+                {
+                    temp = reader.Value;
+                    break;
+                }
+
+            }
+
+            lblCurrentTemp.Text = "Температура: " + temp + " С";
+        }
     }
 }

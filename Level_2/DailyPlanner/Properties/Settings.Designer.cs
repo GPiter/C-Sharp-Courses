@@ -34,5 +34,15 @@ namespace DailyPlanner.Properties {
                 this["notepadFilename"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://weather.cobbnz.com/weatherservice/webservice.asmx")]
+        public string DailyPlanner_com_cobbnz_weather_clsWebService {
+            get {
+                return ((string)(this["DailyPlanner_com_cobbnz_weather_clsWebService"]));
+            }
+        }
     }
 }

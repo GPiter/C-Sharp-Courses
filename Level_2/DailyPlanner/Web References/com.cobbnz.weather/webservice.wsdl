@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetCurrentConditions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WeatherDataURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentConditionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentConditionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentConditionsExtra">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WeatherDataURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentConditionsExtraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentConditionsExtraResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentConditionsAsXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WeatherDataURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentConditionsAsXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentConditionsAsXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetForecast">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetForecastResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetForecastResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCurrentConditionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentConditions" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentConditionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentConditionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentConditionsExtraSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentConditionsExtra" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentConditionsExtraSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentConditionsExtraResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentConditionsAsXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentConditionsAsXML" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentConditionsAsXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentConditionsAsXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetForecastSoapIn">
+    <wsdl:part name="parameters" element="tns:GetForecast" />
+  </wsdl:message>
+  <wsdl:message name="GetForecastSoapOut">
+    <wsdl:part name="parameters" element="tns:GetForecastResponse" />
+  </wsdl:message>
+  <wsdl:portType name="clsWebServiceSoap">
+    <wsdl:operation name="GetCurrentConditions">
+      <wsdl:input message="tns:GetCurrentConditionsSoapIn" />
+      <wsdl:output message="tns:GetCurrentConditionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentConditionsExtra">
+      <wsdl:input message="tns:GetCurrentConditionsExtraSoapIn" />
+      <wsdl:output message="tns:GetCurrentConditionsExtraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentConditionsAsXML">
+      <wsdl:input message="tns:GetCurrentConditionsAsXMLSoapIn" />
+      <wsdl:output message="tns:GetCurrentConditionsAsXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetForecast">
+      <wsdl:input message="tns:GetForecastSoapIn" />
+      <wsdl:output message="tns:GetForecastSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="clsWebServiceSoap" type="tns:clsWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCurrentConditions">
+      <soap:operation soapAction="http://tempuri.org/GetCurrentConditions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentConditionsExtra">
+      <soap:operation soapAction="http://tempuri.org/GetCurrentConditionsExtra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentConditionsAsXML">
+      <soap:operation soapAction="http://tempuri.org/GetCurrentConditionsAsXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForecast">
+      <soap:operation soapAction="http://tempuri.org/GetForecast" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="clsWebServiceSoap12" type="tns:clsWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCurrentConditions">
+      <soap12:operation soapAction="http://tempuri.org/GetCurrentConditions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentConditionsExtra">
+      <soap12:operation soapAction="http://tempuri.org/GetCurrentConditionsExtra" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentConditionsAsXML">
+      <soap12:operation soapAction="http://tempuri.org/GetCurrentConditionsAsXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForecast">
+      <soap12:operation soapAction="http://tempuri.org/GetForecast" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="clsWebService">
+    <wsdl:port name="clsWebServiceSoap" binding="tns:clsWebServiceSoap">
+      <soap:address location="http://weather.cobbnz.com/weatherservice/webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="clsWebServiceSoap12" binding="tns:clsWebServiceSoap12">
+      <soap12:address location="http://weather.cobbnz.com/weatherservice/webservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

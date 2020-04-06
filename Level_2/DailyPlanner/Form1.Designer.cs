@@ -80,12 +80,17 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsbCurrentTimeInsert = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.trbTimer = new System.Windows.Forms.TrackBar();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblTimer = new System.Windows.Forms.Label();
-            this.txtbTimerMsg = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtbTimerMsg = new System.Windows.Forms.TextBox();
+            this.lblTimer = new System.Windows.Forms.Label();
+            this.trbTimer = new System.Windows.Forms.TrackBar();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tbWeatherInfo = new System.Windows.Forms.TextBox();
+            this.btnGetWeather = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCurrentTemp = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -93,8 +98,9 @@
             this.tabPage1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trbTimer)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trbTimer)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -467,6 +473,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 49);
             this.tabControl1.Name = "tabControl1";
@@ -528,14 +535,15 @@
             this.tabPage2.Text = "Таймер";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // trbTimer
+            // btnStart
             // 
-            this.trbTimer.Location = new System.Drawing.Point(18, 19);
-            this.trbTimer.Maximum = 600;
-            this.trbTimer.Name = "trbTimer";
-            this.trbTimer.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trbTimer.Size = new System.Drawing.Size(45, 300);
-            this.trbTimer.TabIndex = 0;
+            this.btnStart.Location = new System.Drawing.Point(94, 290);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 2;
+            this.btnStart.Text = "Старт";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // groupBox1
             // 
@@ -548,6 +556,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Инфо";
             // 
+            // txtbTimerMsg
+            // 
+            this.txtbTimerMsg.Location = new System.Drawing.Point(111, 32);
+            this.txtbTimerMsg.Multiline = true;
+            this.txtbTimerMsg.Name = "txtbTimerMsg";
+            this.txtbTimerMsg.Size = new System.Drawing.Size(187, 185);
+            this.txtbTimerMsg.TabIndex = 1;
+            // 
             // lblTimer
             // 
             this.lblTimer.AutoSize = true;
@@ -557,28 +573,68 @@
             this.lblTimer.TabIndex = 0;
             this.lblTimer.Text = "label1";
             // 
-            // txtbTimerMsg
+            // trbTimer
             // 
-            this.txtbTimerMsg.Location = new System.Drawing.Point(111, 32);
-            this.txtbTimerMsg.Multiline = true;
-            this.txtbTimerMsg.Name = "txtbTimerMsg";
-            this.txtbTimerMsg.Size = new System.Drawing.Size(187, 185);
-            this.txtbTimerMsg.TabIndex = 1;
+            this.trbTimer.Location = new System.Drawing.Point(18, 19);
+            this.trbTimer.Maximum = 600;
+            this.trbTimer.Name = "trbTimer";
+            this.trbTimer.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trbTimer.Size = new System.Drawing.Size(45, 300);
+            this.trbTimer.TabIndex = 0;
             // 
-            // btnStart
+            // tabPage3
             // 
-            this.btnStart.Location = new System.Drawing.Point(94, 290);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 2;
-            this.btnStart.Text = "Старт";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
+            this.tabPage3.Controls.Add(this.lblCurrentTemp);
+            this.tabPage3.Controls.Add(this.label1);
+            this.tabPage3.Controls.Add(this.tbWeatherInfo);
+            this.tabPage3.Controls.Add(this.btnGetWeather);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(792, 353);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Погода";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tbWeatherInfo
+            // 
+            this.tbWeatherInfo.Location = new System.Drawing.Point(19, 67);
+            this.tbWeatherInfo.Multiline = true;
+            this.tbWeatherInfo.Name = "tbWeatherInfo";
+            this.tbWeatherInfo.Size = new System.Drawing.Size(324, 235);
+            this.tbWeatherInfo.TabIndex = 1;
+            // 
+            // btnGetWeather
+            // 
+            this.btnGetWeather.Location = new System.Drawing.Point(19, 14);
+            this.btnGetWeather.Name = "btnGetWeather";
+            this.btnGetWeather.Size = new System.Drawing.Size(75, 23);
+            this.btnGetWeather.TabIndex = 0;
+            this.btnGetWeather.Text = "Получить";
+            this.btnGetWeather.UseVisualStyleBackColor = true;
+            this.btnGetWeather.Click += new System.EventHandler(this.BtnGetWeather_Click);
             // 
             // timer2
             // 
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "XML - формат";
+            // 
+            // lblCurrentTemp
+            // 
+            this.lblCurrentTemp.AutoSize = true;
+            this.lblCurrentTemp.Location = new System.Drawing.Point(362, 67);
+            this.lblCurrentTemp.Name = "lblCurrentTemp";
+            this.lblCurrentTemp.Size = new System.Drawing.Size(83, 13);
+            this.lblCurrentTemp.TabIndex = 3;
+            this.lblCurrentTemp.Text = "Температура: -";
             // 
             // Form1
             // 
@@ -607,9 +663,11 @@
             this.toolStrip2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trbTimer)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trbTimer)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -673,6 +731,11 @@
         private System.Windows.Forms.TextBox txtbTimerMsg;
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox tbWeatherInfo;
+        private System.Windows.Forms.Button btnGetWeather;
+        private System.Windows.Forms.Label lblCurrentTemp;
+        private System.Windows.Forms.Label label1;
     }
 }
 
