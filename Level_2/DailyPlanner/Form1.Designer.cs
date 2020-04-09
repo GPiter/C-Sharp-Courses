@@ -80,17 +80,31 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsbCurrentTimeInsert = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnRestCount = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblRestDuration = new System.Windows.Forms.Label();
+            this.dtpRestFinish = new System.Windows.Forms.DateTimePicker();
+            this.dtpRestStart = new System.Windows.Forms.DateTimePicker();
             this.btnStart = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtbTimerMsg = new System.Windows.Forms.TextBox();
             this.lblTimer = new System.Windows.Forms.Label();
             this.trbTimer = new System.Windows.Forms.TrackBar();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblCurrentTemp = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbWeatherInfo = new System.Windows.Forms.TextBox();
             this.btnGetWeather = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lblEuroRate = new System.Windows.Forms.Label();
+            this.lblCurrentRate = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbRateInfo = new System.Windows.Forms.TextBox();
+            this.tbGetRate = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCurrentTemp = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -98,9 +112,11 @@
             this.tabPage1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTimer)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -474,6 +490,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 49);
             this.tabControl1.Name = "tabControl1";
@@ -483,6 +500,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.rtbNotepad);
             this.tabPage1.Controls.Add(this.toolStrip2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -495,10 +513,10 @@
             // 
             // rtbNotepad
             // 
-            this.rtbNotepad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbNotepad.Dock = System.Windows.Forms.DockStyle.Left;
             this.rtbNotepad.Location = new System.Drawing.Point(3, 28);
             this.rtbNotepad.Name = "rtbNotepad";
-            this.rtbNotepad.Size = new System.Drawing.Size(786, 322);
+            this.rtbNotepad.Size = new System.Drawing.Size(409, 322);
             this.rtbNotepad.TabIndex = 1;
             this.rtbNotepad.Text = "";
             // 
@@ -524,6 +542,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnRestCount);
+            this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.btnStart);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.trbTimer);
@@ -535,9 +555,74 @@
             this.tabPage2.Text = "Таймер";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnRestCount
+            // 
+            this.btnRestCount.Location = new System.Drawing.Point(482, 267);
+            this.btnRestCount.Name = "btnRestCount";
+            this.btnRestCount.Size = new System.Drawing.Size(75, 23);
+            this.btnRestCount.TabIndex = 4;
+            this.btnRestCount.Text = "Рассчитать";
+            this.btnRestCount.UseVisualStyleBackColor = true;
+            this.btnRestCount.Click += new System.EventHandler(this.BtnRestCount_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.lblRestDuration);
+            this.groupBox2.Controls.Add(this.dtpRestFinish);
+            this.groupBox2.Controls.Add(this.dtpRestStart);
+            this.groupBox2.Location = new System.Drawing.Point(482, 19);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(280, 242);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Длина отпуска";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Конец";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Начало";
+            // 
+            // lblRestDuration
+            // 
+            this.lblRestDuration.AutoSize = true;
+            this.lblRestDuration.Location = new System.Drawing.Point(17, 99);
+            this.lblRestDuration.Name = "lblRestDuration";
+            this.lblRestDuration.Size = new System.Drawing.Size(105, 13);
+            this.lblRestDuration.TabIndex = 2;
+            this.lblRestDuration.Text = "Количество дней: 0";
+            // 
+            // dtpRestFinish
+            // 
+            this.dtpRestFinish.Location = new System.Drawing.Point(64, 58);
+            this.dtpRestFinish.Name = "dtpRestFinish";
+            this.dtpRestFinish.Size = new System.Drawing.Size(200, 20);
+            this.dtpRestFinish.TabIndex = 1;
+            // 
+            // dtpRestStart
+            // 
+            this.dtpRestStart.Location = new System.Drawing.Point(64, 32);
+            this.dtpRestStart.Name = "dtpRestStart";
+            this.dtpRestStart.Size = new System.Drawing.Size(200, 20);
+            this.dtpRestStart.TabIndex = 0;
+            // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(94, 290);
+            this.btnStart.Location = new System.Drawing.Point(94, 267);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 2;
@@ -567,9 +652,10 @@
             // lblTimer
             // 
             this.lblTimer.AutoSize = true;
+            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTimer.Location = new System.Drawing.Point(20, 35);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(35, 13);
+            this.lblTimer.Size = new System.Drawing.Size(92, 31);
             this.lblTimer.TabIndex = 0;
             this.lblTimer.Text = "label1";
             // 
@@ -595,11 +681,31 @@
             this.tabPage3.Text = "Погода";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // lblCurrentTemp
+            // 
+            this.lblCurrentTemp.AutoSize = true;
+            this.lblCurrentTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblCurrentTemp.Location = new System.Drawing.Point(362, 67);
+            this.lblCurrentTemp.Name = "lblCurrentTemp";
+            this.lblCurrentTemp.Size = new System.Drawing.Size(121, 16);
+            this.lblCurrentTemp.TabIndex = 3;
+            this.lblCurrentTemp.Text = "Температура: -";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "XML - формат";
+            // 
             // tbWeatherInfo
             // 
             this.tbWeatherInfo.Location = new System.Drawing.Point(19, 67);
             this.tbWeatherInfo.Multiline = true;
             this.tbWeatherInfo.Name = "tbWeatherInfo";
+            this.tbWeatherInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbWeatherInfo.Size = new System.Drawing.Size(324, 235);
             this.tbWeatherInfo.TabIndex = 1;
             // 
@@ -613,28 +719,80 @@
             this.btnGetWeather.UseVisualStyleBackColor = true;
             this.btnGetWeather.Click += new System.EventHandler(this.BtnGetWeather_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.lblEuroRate);
+            this.tabPage4.Controls.Add(this.lblCurrentRate);
+            this.tabPage4.Controls.Add(this.label4);
+            this.tabPage4.Controls.Add(this.tbRateInfo);
+            this.tabPage4.Controls.Add(this.tbGetRate);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(792, 353);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Курс валют";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lblEuroRate
+            // 
+            this.lblEuroRate.AutoSize = true;
+            this.lblEuroRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblEuroRate.Location = new System.Drawing.Point(362, 104);
+            this.lblEuroRate.Name = "lblEuroRate";
+            this.lblEuroRate.Size = new System.Drawing.Size(96, 16);
+            this.lblEuroRate.TabIndex = 5;
+            this.lblEuroRate.Text = "Курс евро: -";
+            // 
+            // lblCurrentRate
+            // 
+            this.lblCurrentRate.AutoSize = true;
+            this.lblCurrentRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblCurrentRate.Location = new System.Drawing.Point(362, 67);
+            this.lblCurrentRate.Name = "lblCurrentRate";
+            this.lblCurrentRate.Size = new System.Drawing.Size(123, 16);
+            this.lblCurrentRate.TabIndex = 4;
+            this.lblCurrentRate.Text = "Курс доллара: -";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 48);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "XML - формат";
+            // 
+            // tbRateInfo
+            // 
+            this.tbRateInfo.Location = new System.Drawing.Point(19, 67);
+            this.tbRateInfo.Multiline = true;
+            this.tbRateInfo.Name = "tbRateInfo";
+            this.tbRateInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbRateInfo.Size = new System.Drawing.Size(324, 235);
+            this.tbRateInfo.TabIndex = 1;
+            // 
+            // tbGetRate
+            // 
+            this.tbGetRate.Location = new System.Drawing.Point(19, 14);
+            this.tbGetRate.Name = "tbGetRate";
+            this.tbGetRate.Size = new System.Drawing.Size(75, 23);
+            this.tbGetRate.TabIndex = 0;
+            this.tbGetRate.Text = "Получить";
+            this.tbGetRate.UseVisualStyleBackColor = true;
+            this.tbGetRate.Click += new System.EventHandler(this.TbGetRate_Click);
+            // 
             // timer2
             // 
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
             // 
-            // label1
+            // dateTimePicker1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "XML - формат";
-            // 
-            // lblCurrentTemp
-            // 
-            this.lblCurrentTemp.AutoSize = true;
-            this.lblCurrentTemp.Location = new System.Drawing.Point(362, 67);
-            this.lblCurrentTemp.Name = "lblCurrentTemp";
-            this.lblCurrentTemp.Size = new System.Drawing.Size(83, 13);
-            this.lblCurrentTemp.TabIndex = 3;
-            this.lblCurrentTemp.Text = "Температура: -";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(457, 46);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 2;
             // 
             // Form1
             // 
@@ -663,11 +821,15 @@
             this.toolStrip2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTimer)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -736,6 +898,20 @@
         private System.Windows.Forms.Button btnGetWeather;
         private System.Windows.Forms.Label lblCurrentTemp;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnRestCount;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblRestDuration;
+        private System.Windows.Forms.DateTimePicker dtpRestFinish;
+        private System.Windows.Forms.DateTimePicker dtpRestStart;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label lblCurrentRate;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbRateInfo;
+        private System.Windows.Forms.Button tbGetRate;
+        private System.Windows.Forms.Label lblEuroRate;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
 

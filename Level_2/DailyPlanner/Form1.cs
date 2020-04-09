@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace DailyPlanner
 {
@@ -158,6 +159,60 @@ namespace DailyPlanner
             }
 
             lblCurrentTemp.Text = "Температура: " + temp + " С";
+        }
+
+        private void BtnRestCount_Click(object sender, EventArgs e)
+        {
+            int daysCount;
+            daysCount = (dtpRestFinish.Value.ToUniversalTime() - dtpRestStart.Value.ToUniversalTime()).Days;
+            lblRestDuration.Text = "Количество дней: " + daysCount.ToString();
+        }
+
+        private void TbGetRate_Click(object sender, EventArgs e)
+        {
+            var rate = new ru.cbr.www.DailyInfo();
+            var str_xml = rate.GetCursOnDateXML(DateTime.Now);  // получаемый объект имеет тип XmlNode
+
+            foreach(XmlNode xmlNode in str_xml)
+            {
+                // Считываем содержимое первого дочернего элемента узла
+                string nodeChildConvert = xmlNode.FirstChild.InnerText;
+
+                // Как выяснилось, он приходит в странном формате с кучей пробелов в конце, поэтому очищаем полученную строку от них
+                nodeChildConvert = nodeChildConvert.Trim();
+
+                tbRateInfo.Text += nodeChildConvert + '\r' + '\n';
+                
+                if (nodeChildConvert == "Доллар США")
+                {
+                    // Проходим по содержимому остальных дочерних элементов
+                    foreach (XmlNode xmlNodeChild in xmlNode.ChildNodes)
+                    {
+                        if (xmlNodeChild.Name == "Vcurs")
+                        {
+                            lblCurrentRate.Text = "Курс доллара: " + xmlNodeChild.InnerText;
+                        }
+                    }
+                }
+
+                if (nodeChildConvert == "Евро")
+                {
+                    foreach (XmlNode xmlNodeChild in xmlNode.ChildNodes)
+                    {
+                        if (xmlNodeChild.Name == "Vcurs")
+                        {
+                            lblEuroRate.Text = "Курс евро: " + xmlNodeChild.InnerText;
+                        }
+                    }
+                }
+
+                if (nodeChildConvert == "Японская иена")
+                {
+                    break;
+                }
+
+            }
+
         }
     }
 }

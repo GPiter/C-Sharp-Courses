@@ -44,5 +44,15 @@ namespace DailyPlanner.Properties {
                 return ((string)(this["DailyPlanner_com_cobbnz_weather_clsWebService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.cbr.ru/dailyinfowebserv/dailyinfo.asmx")]
+        public string DailyPlanner_ru_cbr_www_DailyInfo {
+            get {
+                return ((string)(this["DailyPlanner_ru_cbr_www_DailyInfo"]));
+            }
+        }
     }
 }

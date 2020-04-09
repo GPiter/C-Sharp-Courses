@@ -8,5 +8,8 @@
     <Setting Name="DailyPlanner_com_cobbnz_weather_clsWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://weather.cobbnz.com/weatherservice/webservice.asmx</Value>
     </Setting>
+    <Setting Name="DailyPlanner_ru_cbr_www_DailyInfo" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.cbr.ru/dailyinfowebserv/dailyinfo.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
