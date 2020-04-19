@@ -1,24 +1,88 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace DailyPlanner
 {
     public partial class Form1 : Form
     {
         string notepadFilename;
+
+        BindingSource bindSrc = new BindingSource();
+
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(MemorFile));
+        const string strFilter = "XML files (*.xml) | *.xml";
+
         public Form1()
         {
             InitializeComponent();
             lblTimer.DataBindings.Add("Text", trbTimer, "Value");
+
+            // Связывание данных во вкладке "Календарь"
+            BindingMemory();
+
         }
+
+        // ------ Изучение BindingSource -----
+        // Метод привязки данных с использованием BindingSource
+        private void BindingMemory()
+        {
+            // Инициализация BindingSource
+            MemorFile memoryFiles = new MemorFile();
+            memoryFiles.Memories.Add(new Memory());
+            bindSrc.DataSource = memoryFiles;
+            bindSrc.DataMember = "Memories";
+
+            // Связываем через BindingSource dtpMemory с объектом memoryFiles
+            dtpMemory.DataBindings.Add("Value", bindSrc, "Date");
+            dtpMemory.DataBindings[0].DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
+
+            tbMemory.DataBindings.Add("Text", bindSrc, "Text");
+            tbMemory.DataBindings[0].DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
+
+            // Связывание BindingNavigator и BindingSource
+            bindNavigator.BindingSource = bindSrc;
+
+            // Добавление DataGridView
+            grid.AutoGenerateColumns = false;
+            grid.DataSource = bindSrc;
+            DataGridViewTextBoxColumn tbColumn = new DataGridViewTextBoxColumn();
+            grid.Columns.Add(tbColumn);
+            grid.Columns[0].DataPropertyName = "Text";
+            grid.Columns[0].Name = "Text";
+            CalendarColumn calColumn = new CalendarColumn();
+            grid.Columns.Add(calColumn);
+            grid.Columns[1].DataPropertyName = "Date";
+            grid.Columns[1].Name = "Date";
+        }
+
+        // Обработка клавиш Сохранить и Загрузить. Сериализация и десериализация в XML
+        private void BtnCalendarSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = strFilter;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sw = new StreamWriter(dlg.FileName);
+                xmlSerializer.Serialize(sw, bindSrc.DataSource);
+                sw.Close();
+            }
+        }
+
+        private void BtnCalendarLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = strFilter;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader sr = new StreamReader(dlg.FileName);
+                bindSrc.DataSource = xmlSerializer.Deserialize(sr);
+                sr.Close();
+            }
+        }
+        // ---------------------------------
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
@@ -121,44 +185,53 @@ namespace DailyPlanner
 
         private void BtnGetWeather_Click(object sender, EventArgs e)
         {
-            // Используем веб сервис для получения погоды
-            var weather = new com.cobbnz.weather.clsWebService();
-            // Записываем результат запроса в формат xml
-            var str_xml = weather.GetCurrentConditionsAsXML("Saint-Petersburg");
-            // Отображаем xml-формат в поле textbox
-            tbWeatherInfo.Text = str_xml.ToString();
-
-            // Десериализация полученного xml
-            // Создаем объкект типа "XmlDocument"
-            var document = new System.Xml.XmlDocument();
-            document.LoadXml(str_xml);
-
-            // Создаем объект типа "Чтение узлов xml"
-            var reader = new System.Xml.XmlNodeReader(document);
-            var name = String.Empty;
-            var temp = String.Empty;
-
-            // Цикл по узлам xml-документа
-            while (reader.Read() == true)
+            try
             {
-                // Читаем последовательно каждый узел, выясняя тип узла
-                if (reader.NodeType == System.Xml.XmlNodeType.Element)
-                    name = reader.Name;
+                // Используем веб сервис для получения погоды
+                var weather = new com.cobbnz.weather.clsWebService();
+                // Записываем результат запроса в формат xml
+                var str_xml = weather.GetCurrentConditionsAsXML("Saint-Petersburg");
+                // Отображаем xml-формат в поле textbox
+                tbWeatherInfo.Text = str_xml.ToString();
 
-                // Каждый раз запоминаем имя узла
-                if (reader.NodeType != System.Xml.XmlNodeType.Text)
-                    continue;
+                // Десериализация полученного xml
+                // Создаем объкект типа "XmlDocument"
+                var document = new System.Xml.XmlDocument();
+                document.LoadXml(str_xml);
 
-                // Выход из цикла, когда прочитали данные узла TemperatureCurrent
-                if (name == "TemperatureCurrent")
+                // Создаем объект типа "Чтение узлов xml"
+                var reader = new System.Xml.XmlNodeReader(document);
+                var name = String.Empty;
+                var temp = String.Empty;
+
+                // Цикл по узлам xml-документа
+                while (reader.Read() == true)
                 {
-                    temp = reader.Value;
-                    break;
+                    // Читаем последовательно каждый узел, выясняя тип узла
+                    if (reader.NodeType == System.Xml.XmlNodeType.Element)
+                        name = reader.Name;
+
+                    // Каждый раз запоминаем имя узла
+                    if (reader.NodeType != System.Xml.XmlNodeType.Text)
+                        continue;
+
+                    // Выход из цикла, когда прочитали данные узла TemperatureCurrent
+                    if (name == "TemperatureCurrent")
+                    {
+                        temp = reader.Value;
+                        break;
+                    }
+
                 }
 
+                lblCurrentTemp.Text = "Температура: " + temp + " С";
             }
 
-            lblCurrentTemp.Text = "Температура: " + temp + " С";
+            catch
+            {
+                MessageBox.Show("Ошибка подключения к веб-службе!", "Внимание!");
+            }
+
         }
 
         private void BtnRestCount_Click(object sender, EventArgs e)
@@ -170,49 +243,62 @@ namespace DailyPlanner
 
         private void TbGetRate_Click(object sender, EventArgs e)
         {
-            var rate = new ru.cbr.www.DailyInfo();
-            var str_xml = rate.GetCursOnDateXML(DateTime.Now);  // получаемый объект имеет тип XmlNode
-
-            foreach(XmlNode xmlNode in str_xml)
+            try
             {
-                // Считываем содержимое первого дочернего элемента узла
-                string nodeChildConvert = xmlNode.FirstChild.InnerText;
+                var rate = new ru.cbr.www.DailyInfo();
+                var str_xml = rate.GetCursOnDateXML(DateTime.Now);  // получаемый объект имеет тип XmlNode
 
-                // Как выяснилось, он приходит в странном формате с кучей пробелов в конце, поэтому очищаем полученную строку от них
-                nodeChildConvert = nodeChildConvert.Trim();
-
-                tbRateInfo.Text += nodeChildConvert + '\r' + '\n';
-                
-                if (nodeChildConvert == "Доллар США")
+                foreach (XmlNode xmlNode in str_xml)
                 {
-                    // Проходим по содержимому остальных дочерних элементов
-                    foreach (XmlNode xmlNodeChild in xmlNode.ChildNodes)
+                    // Считываем содержимое первого дочернего элемента узла
+                    string nodeChildConvert = xmlNode.FirstChild.InnerText;
+
+                    // Как выяснилось, он приходит в странном формате с кучей пробелов в конце, поэтому очищаем полученную строку от них
+                    nodeChildConvert = nodeChildConvert.Trim();
+
+                    tbRateInfo.Text += nodeChildConvert + '\r' + '\n';
+
+                    if (nodeChildConvert == "Доллар США")
                     {
-                        if (xmlNodeChild.Name == "Vcurs")
+                        // Проходим по содержимому остальных дочерних элементов
+                        foreach (XmlNode xmlNodeChild in xmlNode.ChildNodes)
                         {
-                            lblCurrentRate.Text = "Курс доллара: " + xmlNodeChild.InnerText;
+                            if (xmlNodeChild.Name == "Vcurs")
+                            {
+                                lblCurrentRate.Text = "Курс доллара: " + xmlNodeChild.InnerText;
+                            }
                         }
                     }
-                }
 
-                if (nodeChildConvert == "Евро")
-                {
-                    foreach (XmlNode xmlNodeChild in xmlNode.ChildNodes)
+                    if (nodeChildConvert == "Евро")
                     {
-                        if (xmlNodeChild.Name == "Vcurs")
+                        foreach (XmlNode xmlNodeChild in xmlNode.ChildNodes)
                         {
-                            lblEuroRate.Text = "Курс евро: " + xmlNodeChild.InnerText;
+                            if (xmlNodeChild.Name == "Vcurs")
+                            {
+                                lblEuroRate.Text = "Курс евро: " + xmlNodeChild.InnerText;
+                            }
                         }
                     }
-                }
 
-                if (nodeChildConvert == "Японская иена")
-                {
-                    break;
+                    if (nodeChildConvert == "Японская иена")
+                    {
+                        break;
+                    }
                 }
-
             }
 
+            catch
+            {
+                MessageBox.Show("Ошибка подключения к веб-службе!", "Внимание!");
+            }
+
+        }
+
+        private void CalDays_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            dtpMemory.Value = calDays.SelectionStart;
+            calDays.BoldedDates = (bindSrc.DataSource as MemorFile).Dates;
         }
     }
 }

@@ -38,8 +38,6 @@
             this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.печатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.предварительныйпросмотрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +77,24 @@
             this.rtbNotepad = new System.Windows.Forms.RichTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsbCurrentTimeInsert = new System.Windows.Forms.ToolStripButton();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.grid = new System.Windows.Forms.DataGridView();
+            this.bindNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCalendarLoad = new System.Windows.Forms.Button();
+            this.btnCalendarSave = new System.Windows.Forms.Button();
+            this.tbMemory = new System.Windows.Forms.TextBox();
+            this.dtpMemory = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRestCount = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -104,13 +120,17 @@
             this.tbRateInfo = new System.Windows.Forms.TextBox();
             this.tbGetRate = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.calDays = new System.Windows.Forms.MonthCalendar();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindNavigator)).BeginInit();
+            this.bindNavigator.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -141,8 +161,6 @@
             this.tsmiSave,
             this.tsmiSaveAs,
             this.toolStripSeparator1,
-            this.печатьToolStripMenuItem,
-            this.предварительныйпросмотрToolStripMenuItem,
             this.toolStripSeparator2,
             this.tsmiExit});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
@@ -155,7 +173,7 @@
             this.tsmiNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiNew.Name = "tsmiNew";
             this.tsmiNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tsmiNew.Size = new System.Drawing.Size(233, 22);
+            this.tsmiNew.Size = new System.Drawing.Size(180, 22);
             this.tsmiNew.Text = "&Создать";
             this.tsmiNew.Click += new System.EventHandler(this.TsmiNew_Click);
             // 
@@ -195,23 +213,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(230, 6);
-            // 
-            // печатьToolStripMenuItem
-            // 
-            this.печатьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("печатьToolStripMenuItem.Image")));
-            this.печатьToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.печатьToolStripMenuItem.Name = "печатьToolStripMenuItem";
-            this.печатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.печатьToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.печатьToolStripMenuItem.Text = "&Печать";
-            // 
-            // предварительныйпросмотрToolStripMenuItem
-            // 
-            this.предварительныйпросмотрToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("предварительныйпросмотрToolStripMenuItem.Image")));
-            this.предварительныйпросмотрToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.предварительныйпросмотрToolStripMenuItem.Name = "предварительныйпросмотрToolStripMenuItem";
-            this.предварительныйпросмотрToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.предварительныйпросмотрToolStripMenuItem.Text = "Предварительный про&смотр";
             // 
             // toolStripSeparator2
             // 
@@ -488,6 +489,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -500,7 +502,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.rtbNotepad);
             this.tabPage1.Controls.Add(this.toolStrip2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -539,6 +540,181 @@
             this.tsbCurrentTimeInsert.Size = new System.Drawing.Size(46, 22);
             this.tsbCurrentTimeInsert.Text = "Время";
             this.tsbCurrentTimeInsert.Click += new System.EventHandler(this.TsbCurrentTimeInsert_Click);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.calDays);
+            this.tabPage5.Controls.Add(this.grid);
+            this.tabPage5.Controls.Add(this.bindNavigator);
+            this.tabPage5.Controls.Add(this.btnCalendarLoad);
+            this.tabPage5.Controls.Add(this.btnCalendarSave);
+            this.tabPage5.Controls.Add(this.tbMemory);
+            this.tabPage5.Controls.Add(this.dtpMemory);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(792, 353);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Календарь";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // grid
+            // 
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid.Location = new System.Drawing.Point(309, 68);
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(284, 245);
+            this.grid.TabIndex = 7;
+            // 
+            // bindNavigator
+            // 
+            this.bindNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.bindNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindNavigator.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.bindNavigator.Location = new System.Drawing.Point(0, 328);
+            this.bindNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindNavigator.Name = "bindNavigator";
+            this.bindNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindNavigator.Size = new System.Drawing.Size(792, 25);
+            this.bindNavigator.TabIndex = 6;
+            this.bindNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Добавить";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(43, 22);
+            this.bindingNavigatorCountItem.Text = "для {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Общее число элементов";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Удалить";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Переместить в начало";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Переместить назад";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Положение";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Текущее положение";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Переместить вперед";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Переместить в конец";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnCalendarLoad
+            // 
+            this.btnCalendarLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCalendarLoad.Location = new System.Drawing.Point(226, 21);
+            this.btnCalendarLoad.Name = "btnCalendarLoad";
+            this.btnCalendarLoad.Size = new System.Drawing.Size(115, 34);
+            this.btnCalendarLoad.TabIndex = 5;
+            this.btnCalendarLoad.Text = "Загрузить";
+            this.btnCalendarLoad.UseVisualStyleBackColor = true;
+            this.btnCalendarLoad.Click += new System.EventHandler(this.BtnCalendarLoad_Click);
+            // 
+            // btnCalendarSave
+            // 
+            this.btnCalendarSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCalendarSave.Location = new System.Drawing.Point(347, 22);
+            this.btnCalendarSave.Name = "btnCalendarSave";
+            this.btnCalendarSave.Size = new System.Drawing.Size(122, 34);
+            this.btnCalendarSave.TabIndex = 4;
+            this.btnCalendarSave.Text = "Сохранить в XML";
+            this.btnCalendarSave.UseVisualStyleBackColor = true;
+            this.btnCalendarSave.Click += new System.EventHandler(this.BtnCalendarSave_Click);
+            // 
+            // tbMemory
+            // 
+            this.tbMemory.Location = new System.Drawing.Point(9, 68);
+            this.tbMemory.Multiline = true;
+            this.tbMemory.Name = "tbMemory";
+            this.tbMemory.Size = new System.Drawing.Size(263, 245);
+            this.tbMemory.TabIndex = 1;
+            // 
+            // dtpMemory
+            // 
+            this.dtpMemory.Location = new System.Drawing.Point(8, 28);
+            this.dtpMemory.Name = "dtpMemory";
+            this.dtpMemory.Size = new System.Drawing.Size(200, 20);
+            this.dtpMemory.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -648,6 +824,7 @@
             this.txtbTimerMsg.Name = "txtbTimerMsg";
             this.txtbTimerMsg.Size = new System.Drawing.Size(187, 185);
             this.txtbTimerMsg.TabIndex = 1;
+            this.txtbTimerMsg.Text = "Сработало напоминание!";
             // 
             // lblTimer
             // 
@@ -786,13 +963,12 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
             // 
-            // dateTimePicker1
+            // calDays
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(457, 46);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 2;
+            this.calDays.Location = new System.Drawing.Point(614, 68);
+            this.calDays.Name = "calDays";
+            this.calDays.TabIndex = 8;
+            this.calDays.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.CalDays_DateChanged);
             // 
             // Form1
             // 
@@ -819,6 +995,12 @@
             this.tabPage1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindNavigator)).EndInit();
+            this.bindNavigator.ResumeLayout(false);
+            this.bindNavigator.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -845,8 +1027,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSave;
         private System.Windows.Forms.ToolStripMenuItem tsmiSaveAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem печатьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem предварительныйпросмотрToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.ToolStripMenuItem правкаToolStripMenuItem;
@@ -911,7 +1091,25 @@
         private System.Windows.Forms.TextBox tbRateInfo;
         private System.Windows.Forms.Button tbGetRate;
         private System.Windows.Forms.Label lblEuroRate;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TextBox tbMemory;
+        private System.Windows.Forms.DateTimePicker dtpMemory;
+        private System.Windows.Forms.Button btnCalendarLoad;
+        private System.Windows.Forms.Button btnCalendarSave;
+        private System.Windows.Forms.BindingNavigator bindNavigator;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.DataGridView grid;
+        private System.Windows.Forms.MonthCalendar calDays;
     }
 }
 
