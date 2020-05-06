@@ -8,7 +8,14 @@ namespace MyPhotoshop
     public struct Pixel
     {
         double r, g, b;
+        public Pixel(double r, double g, double b)
+        {
+            this.r = this.g = this.b = 0;
+            this.R = r;
+            this.G = g;
+            this.B = b;
 
+        }
         private double Check(double value)
         {
             if (value < 0 || value > 1) throw new ArgumentException();
