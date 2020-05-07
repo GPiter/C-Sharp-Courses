@@ -5,31 +5,20 @@ using System.Text;
 
 namespace MyPhotoshop
 {
-    class GrayscaleFilter : IFilter
+    public class GrayscaleFilter : PixelFilter
     {
-        public ParameterInfo[] GetParameters()
-        {
-            return new ParameterInfo[0];
-        }
-
         public override string ToString()
         {
             return "Ч/б";
         }
 
-        public Photo Process(Photo original, double[] parameters)
+        public GrayscaleFilter() : base (new EmptyParameters()) { }
+
+        public override Pixel ProcessPixel(Pixel original, IParameters parameters)
         {
-            var result = new Photo(original.width, original.height);
-
-            for (int x = 0; x < result.width; x++)
-                for (int y = 0; y < result.height; y++)
-                {
-                    var lightness = original[x, y].R + original[x, y].G + original[x, y].B;
-                    lightness /= 3;
-                    result[x, y] = new Pixel(lightness, lightness, lightness);
-                }
-
-            return result;
+            var lightness = original.R + original.G + original.B;
+            lightness /= 3;
+            return new Pixel(lightness, lightness, lightness);
         }
     }
 }
